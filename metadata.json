@@ -1,0 +1,7 @@
+{
+  "name": "PetFinance Pro",
+  "description": "Uma plataforma completa de controle financeiro para Pet Shops, permitindo o rastreamento de entradas, saídas, serviços realizados e análises inteligentes com IA.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
