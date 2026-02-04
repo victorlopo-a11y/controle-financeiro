@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.23.0",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@supabase/supabase-js": "^2.94.0",
+    "browserslist": "^4.28.1",
+    "caniuse-lite": "^1.0.30001767",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "@google/genai": "^1.39.0",
     "recharts": "^3.7.0"
   },
   "devDependencies": {

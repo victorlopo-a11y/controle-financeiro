@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Transaction, TransactionType } from '../types';
 
@@ -21,8 +20,9 @@ const TransactionList: React.FC<Props> = ({ transactions, onDelete }) => {
           <thead>
             <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
               <th className="px-6 py-4 font-semibold">Data</th>
-              <th className="px-6 py-4 font-semibold">Descrição / Pet</th>
+              <th className="px-6 py-4 font-semibold">Descrição / Cliente</th>
               <th className="px-6 py-4 font-semibold">Categoria</th>
+              <th className="px-6 py-4 font-semibold">Pagamento</th>
               <th className="px-6 py-4 font-semibold">Responsável</th>
               <th className="px-6 py-4 font-semibold text-right">Valor</th>
               <th className="px-6 py-4 font-semibold text-center">Ações</th>
@@ -31,8 +31,8 @@ const TransactionList: React.FC<Props> = ({ transactions, onDelete }) => {
           <tbody className="divide-y divide-slate-100">
             {transactions.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-10 text-center text-slate-400">
-                  Nenhuma transação registrada.
+                <td colSpan={7} className="px-6 py-10 text-center text-slate-400">
+                  Nenhum lançamento registrado.
                 </td>
               </tr>
             ) : (
@@ -43,9 +43,19 @@ const TransactionList: React.FC<Props> = ({ transactions, onDelete }) => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-medium text-slate-800">{t.description}</div>
+                    {t.clientName && (
+                      <div className="text-xs text-slate-500 font-medium">
+                        <i className="fa-solid fa-user mr-1"></i> {t.clientName}
+                      </div>
+                    )}
                     {t.petName && (
                       <div className="text-xs text-indigo-500 font-medium">
                         <i className="fa-solid fa-paw mr-1"></i> {t.petName}
+                      </div>
+                    )}
+                    {t.recurrence === 'monthly' && (
+                      <div className="text-xs text-amber-600 font-semibold">
+                        <i className="fa-solid fa-repeat mr-1"></i> Recorrente mensal
                       </div>
                     )}
                   </td>
@@ -55,7 +65,11 @@ const TransactionList: React.FC<Props> = ({ transactions, onDelete }) => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-slate-600">
-                    {t.userName}
+                    {t.paymentMethod}
+                    {t.paymentMethod === 'Cartão' && t.cardType ? ` (${t.cardType})` : ''}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-slate-600">
+                    {t.staffName || '-'}
                   </td>
                   <td className={`px-6 py-4 text-sm font-bold text-right ${t.type === TransactionType.INCOME ? 'text-green-600' : 'text-red-600'}`}>
                     {t.type === TransactionType.INCOME ? '+' : '-'} R$ {t.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}

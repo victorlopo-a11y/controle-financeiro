@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Transaction, TransactionType } from '../types';
@@ -8,7 +7,6 @@ interface Props {
 }
 
 const FinancialChart: React.FC<Props> = ({ transactions }) => {
-  // Group by date for Area Chart
   const dailyData = transactions.reduce((acc: any, curr) => {
     const date = curr.date;
     if (!acc[date]) acc[date] = { date, entrada: 0, saida: 0 };
@@ -17,9 +15,10 @@ const FinancialChart: React.FC<Props> = ({ transactions }) => {
     return acc;
   }, {});
 
-  const chartData = Object.values(dailyData).sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const chartData = Object.values(dailyData).sort(
+    (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
-  // Group by category for Pie Chart
   const categoryDataRaw = transactions.reduce((acc: any, curr) => {
     if (!acc[curr.category]) acc[curr.category] = 0;
     acc[curr.category] += curr.amount;
@@ -31,7 +30,7 @@ const FinancialChart: React.FC<Props> = ({ transactions }) => {
     value: categoryDataRaw[key]
   }));
 
-  const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+  const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#0ea5e9', '#f97316'];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">

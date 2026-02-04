@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Transaction, TransactionType } from '../types';
 
@@ -16,9 +15,10 @@ const DashboardCards: React.FC<Props> = ({ transactions }) => {
     .reduce((acc, curr) => acc + curr.amount, 0);
 
   const profit = totalIncome - totalExpense;
+  const servicesCount = transactions.filter(t => t.type === TransactionType.INCOME).length;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center space-x-4">
         <div className="bg-green-100 p-3 rounded-full">
           <i className="fa-solid fa-arrow-up text-green-600 text-xl"></i>
@@ -48,6 +48,16 @@ const DashboardCards: React.FC<Props> = ({ transactions }) => {
           <h3 className={`text-2xl font-bold ${profit >= 0 ? 'text-indigo-700' : 'text-orange-700'}`}>
             R$ {profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </h3>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center space-x-4">
+        <div className="bg-indigo-100 p-3 rounded-full">
+          <i className="fa-solid fa-scissors text-indigo-600 text-xl"></i>
+        </div>
+        <div>
+          <p className="text-sm text-slate-500 font-medium">Serviços no Período</p>
+          <h3 className="text-2xl font-bold text-slate-800">{servicesCount}</h3>
         </div>
       </div>
     </div>

@@ -1,13 +1,20 @@
-
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Transaction } from "../types";
 
 export const analyzeFinances = async (transactions: Transaction[]): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
-  const summary = transactions.map(t => 
-    `- ${t.date}: ${t.type} de R$${t.amount.toFixed(2)} (${t.category}) - ${t.description}`
-  ).join('\n');
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY as string | undefined;
+  if (!apiKey) {
+    return "Chave de API não encontrada. Defina VITE_GEMINI_API_KEY no .env.";
+  }
+
+  const ai = new GoogleGenerativeAI(apiKey);
+
+  const summary = transactions
+    .map(
+      (t) =>
+        `- ${t.date}: ${t.type} de R$${t.amount.toFixed(2)} (${t.category}) - ${t.description}`
+    )
+    .join("\n");
 
   const prompt = `
     Como um consultor financeiro especialista em Pet Shops, analise as seguintes transações recentes:
@@ -23,11 +30,9 @@ export const analyzeFinances = async (transactions: Transaction[]): Promise<stri
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: prompt,
-    });
-    return response.text || "Não foi possível gerar a análise no momento.";
+    const model = ai.getGenerativeModel({ model: "gemini-3-flash-preview" });
+    const result = await model.generateContent(prompt);
+    return result.response.text() || "Não foi possível gerar a análise no momento.";
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
     return "Erro ao conectar com a inteligência artificial. Verifique sua chave de API.";

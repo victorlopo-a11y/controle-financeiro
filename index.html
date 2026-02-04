@@ -10,6 +10,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .dark-mode { background-color: #0b1220; color: #e2e8f0; }
+        .dark-mode .bg-white { background-color: #0f172a !important; }
+        .dark-mode .bg-slate-50 { background-color: #111827 !important; }
+        .dark-mode .bg-slate-100 { background-color: #1f2937 !important; }
+        .dark-mode .border-slate-100 { border-color: #1f2937 !important; }
+        .dark-mode .border-slate-200 { border-color: #334155 !important; }
+        .dark-mode .text-slate-900 { color: #f1f5f9 !important; }
+        .dark-mode .text-slate-800 { color: #e2e8f0 !important; }
+        .dark-mode .text-slate-700 { color: #cbd5f5 !important; }
+        .dark-mode .text-slate-600 { color: #cbd5f5 !important; }
+        .dark-mode .text-slate-500 { color: #94a3b8 !important; }
+        .dark-mode .text-slate-400 { color: #94a3b8 !important; }
+        .dark-mode .text-slate-300 { color: #64748b !important; }
+        .dark-mode .shadow-sm, .dark-mode .shadow-md, .dark-mode .shadow-lg, .dark-mode .shadow-2xl { box-shadow: none !important; }
+        .dark-mode input, .dark-mode select, .dark-mode textarea {
+          background-color: #0b1220 !important;
+          color: #e2e8f0 !important;
+          border-color: #334155 !important;
+        }
+        .dark-mode input::placeholder, .dark-mode textarea::placeholder {
+          color: #94a3b8 !important;
+        }
+        .dark-mode select option {
+          background-color: #0b1220 !important;
+          color: #e2e8f0 !important;
+        }
+        .login-gradient {
+          background: radial-gradient(1200px circle at 10% 10%, rgba(99,102,241,0.35), transparent 60%),
+                      radial-gradient(900px circle at 90% 20%, rgba(16,185,129,0.25), transparent 60%),
+                      radial-gradient(1000px circle at 30% 90%, rgba(14,165,233,0.25), transparent 65%),
+                      linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+        }
+        .glass-card {
+          background: rgba(15, 23, 42, 0.7);
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          box-shadow: 0 24px 60px rgba(2, 6, 23, 0.5);
+          backdrop-filter: blur(12px);
+        }
+        .glow-ring {
+          box-shadow: 0 0 0 6px rgba(255,255,255,0.06), 0 0 45px rgba(99,102,241,0.45);
+        }
     </style>
 <script type="importmap">
 {
@@ -25,5 +66,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>
