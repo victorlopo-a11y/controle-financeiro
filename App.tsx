@@ -9,6 +9,7 @@ import InventoryManager from './components/InventoryManager';
 import ClientManager from './components/ClientManager';
 import { supabase } from './services/supabaseClient';
 import type { Session } from '@supabase/supabase-js';
+import companyLogo from './logo atualizada.png';
 
 type TypeFilter = 'all' | TransactionType;
 type CategoryFilter = 'all' | ServiceCategory;
@@ -573,7 +574,7 @@ const App: React.FC = () => {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative">
           <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4">
             <img
-              src="/logo atualizada.png"
+              src={companyLogo}
               alt="Logo da empresa"
               className="w-40 h-40 rounded-full shadow-2xl border-4 border-white object-cover"
             />
@@ -631,7 +632,7 @@ const App: React.FC = () => {
         </div>
         <div className="md:hidden flex justify-center mt-6">
           <img
-            src="/logo atualizada.png"
+            src={companyLogo}
             alt="Logo da empresa"
             className="w-32 h-32 rounded-full shadow-2xl border-4 border-white object-cover"
           />
